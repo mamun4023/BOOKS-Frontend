@@ -1,19 +1,23 @@
 import { Axios } from "../utils/axios";
 import { useNavigate, Link } from "react-router-dom";
-import {ROUTES} from '../constants/route'
+import { ROUTES } from "../constants/route";
+import { CONSTANT } from "../constants";
 
 export default function Navbar() {
     const navigate = useNavigate();
 
     const LogoutHandler = () => {
-        Axios.post("/user/logout");
-        navigate("/sign-in");
+        Axios.post(ROUTES.LOGOUT).then(() => {
+            navigate(ROUTES.SIGNIN);
+        });
     };
 
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <Link to={ROUTES.HOME} className="btn btn-ghost text-xl">Google Books</Link>
+                <Link to={ROUTES.HOME} className="btn btn-ghost text-xl">
+                    {CONSTANT.GOOGLE_BOOK}
+                </Link>
             </div>
             <div className="flex-none gap-2">
                 <div className="dropdown dropdown-end">
@@ -31,11 +35,11 @@ export default function Navbar() {
                     >
                         <li>
                             <Link to="/profile" className="justify-between">
-                                Profile
+                                {CONSTANT.PROFILE}
                             </Link>
                         </li>
                         <li onClick={() => LogoutHandler()}>
-                            <a>Logout</a>
+                            <a>{CONSTANT.LOGOUT}</a>
                         </li>
                     </ul>
                 </div>

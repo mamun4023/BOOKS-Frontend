@@ -9,7 +9,7 @@ export default function Home() {
                 <div className=" col-span-1">
                     <SearchHistory />
                 </div>
-                <div className=" col-span-4">
+                <div className="col-span-4">
                     <Navbar />
                     <BookSearch />
                 </div>

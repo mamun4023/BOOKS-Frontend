@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Axios } from "../utils/axios";
+import { CONSTANT } from "../constants";
+import { ROUTES } from "../constants/route";
 
 export default function SearchHistory() {
     const [hisroty, setHistory] = useState([]);
 
     const FetchHistory = () => {
-        Axios.get("/me").then((res) => {
+        Axios.get(ROUTES.ME).then((res) => {
             const resData = res?.data?.data?.searchHistory;
             setHistory(resData);
         });
@@ -15,12 +17,11 @@ export default function SearchHistory() {
         FetchHistory();
     }, []);
 
-    const sortedData = hisroty.sort((a, b) => b - a);
-    console.log(sortedData);
-
+    const sortedData = hisroty.sort((a, b) => b.title - a.title);
+  
     return (
         <div className="mt-4">
-            <h1 className=" text-xl font-bold">Search History</h1>
+            <h1 className=" text-xl font-bold"> {CONSTANT.SEARCH_HISTORY} </h1>
             <ul>
                 {sortedData?.map((item, index) => (
                     <li

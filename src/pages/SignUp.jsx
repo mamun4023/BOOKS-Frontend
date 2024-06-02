@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Axios } from "../utils/axios";
 import { toast } from "react-toastify";
 import { ROUTES } from "../constants/route";
+import { CONSTANT } from "../constants";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ export default function SignUp() {
         const data = {
             firstName,
             lastName,
-            role,
             email,
             password,
         };
@@ -81,13 +81,16 @@ export default function SignUp() {
                             />
                         </div>
 
-                        <button className=" w-full btn btn-success text-white">Sign Up</button>
+                        <button className=" w-full btn btn-success text-white">
+                            {" "}
+                            {CONSTANT.SIGNUP}{" "}
+                        </button>
                     </div>
                     <div className="my-2 text-[16px]">
                         <p className="text-gray-600">
-                            Do you have account?
+                            {CONSTANT.DO_YOU_HAVE_AN_ACCOUNT}
                             <Link className=" underline pl-2" to="/sign-in">
-                                Sign-in
+                                {CONSTANT.SIGNIN}
                             </Link>
                         </p>
                     </div>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Axios } from "../utils/axios";
+import { CONSTANT } from "../constants";
 
 const BookSearch = () => {
     const [query, setQuery] = useState("");
@@ -40,7 +41,7 @@ const BookSearch = () => {
                         className="input input-bordered w-full"
                     />
                     <button type="submit" className=" btn w-30">
-                        Search
+                        {CONSTANT.SEARCH}
                     </button>
                 </div>
             </form>

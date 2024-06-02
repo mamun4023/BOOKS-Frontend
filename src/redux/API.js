@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import {Axios} from '../utils/axios'
 
 
 export const applicationAPI = createApi({
-    reducerPath : "APP_API",
+    reducerPath : "API",
     baseQuery: Axios,
     endpoints: (builder) => ({
         signup: builder.mutation({
@@ -14,7 +14,9 @@ export const applicationAPI = createApi({
             }),
         }),
         signin: builder.mutation({
+        
             query: (data) => ({
+                      
                 url: "/sign-in",
                 method: "POST",
                 body: data,

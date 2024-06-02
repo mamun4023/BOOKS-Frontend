@@ -25,5 +25,6 @@ export default function Routing() {
 }
 
 const PrivateRoutes = () => {
-    return Cookies.get("token") ? <Outlet /> : <Navigate to="sign-in" />;
+    const token = Cookies.get("token")
+    return  token? <Outlet /> : <Navigate to="sign-in" />;
 };

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Axios } from "../utils/axios";
 import { toast } from "react-toastify";
+import { ROUTES } from "../constants/route";
 
 export default function SignUp() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [role, setRole] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -22,18 +22,17 @@ export default function SignUp() {
             password,
         };
 
-        Axios.post(`user/sign-up`, data)
+        Axios.post(ROUTES.SIGNUP, data)
             .then((res) => {
                 const resMsg = res.data.message;
                 toast.success(resMsg);
-                navigate("/home");
+                navigate(ROUTES.HOME);
             })
             .catch((err) => {
                 const errMsg = err?.response?.data?.message;
                 toast.error(errMsg);
             });
     };
-
 
     return (
         <div className=" h-screen flex justify-center  items-center">
@@ -59,18 +58,6 @@ export default function SignUp() {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
-                        </div>
-                        <div>
-                            <select
-                                className="select select-bordered w-full"
-                                onChange={(e) => setRole(e.target.value)}
-                                value={role}
-                            >
-                                <option defaultValue={"user"} value={"user"}>
-                                    User
-                                </option>
-                                <option value={"admin"}>Author</option>
-                            </select>
                         </div>
 
                         <div>

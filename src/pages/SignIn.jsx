@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Axios } from "../utils/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { ROUTES } from "../constants/route";
+import { CONSTANT } from "../constants";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -15,9 +16,9 @@ export default function SignIn() {
             email,
             password,
         };
-        Axios.post(`/user/sign-in`, data)
+        Axios.post(ROUTES.SIGNIN, data)
             .then((res) => {
-                navigate("/home");
+                navigate(ROUTES.HOME);
             })
             .catch((err) => {
                 const errMsg = err?.response?.data?.message;
@@ -26,7 +27,7 @@ export default function SignIn() {
     };
 
     return (
-        <div className="h-screen flex justify-center  items-center">
+        <div className="h-screen flex justify-center items-center">
             <div className="w-96  p-2 shadow-lg rounded-md">
                 <form onSubmit={signInHandler}>
                     <div className="flex flex-col gap-4">
@@ -51,13 +52,13 @@ export default function SignIn() {
                             />
                         </div>
 
-                        <button className="btn btn-success text-white">Sign In</button>
+                        <button className="btn btn-success text-white"> {CONSTANT.SIGNIN} </button>
                     </div>
                     <div className="my-2 text-[16px]">
                         <p className="text-gray-600 text-[14px]">
-                            Don't you have account?
+                            {CONSTANT.DONT_HAVE_ACCOUNT}
                             <Link className=" underline pl-2" to="/sign-up">
-                                Sign-Up
+                                {CONSTANT.SIGNUP}
                             </Link>
                         </p>
                     </div>
@@ -65,6 +66,4 @@ export default function SignIn() {
             </div>
         </div>
     );
-
-
 }

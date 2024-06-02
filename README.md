@@ -1,8 +1,28 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Book Management
 
-Currently, two official plugins are available:
+A testing project with some APIs endpoints. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features
+
+- Authentication and Authorization
+- Tracking user Search history
+- Server Logs Tracking
+
+
+## Installation
+
+Install All dependecy
+
+```bash
+  npm install
+```
+
+
+    
+## Run development server
+
+```bash
+  npm run dev
+```

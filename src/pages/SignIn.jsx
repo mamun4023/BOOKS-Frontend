@@ -4,26 +4,37 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
+import {useSigninMutation} from '../redux/API'
 
 export default function SignIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [signin] = useSigninMutation()
 
-    const signInHandler = (e) => {
+    const signInHandler = async(e) => {
         e.preventDefault();
         const data = {
             email,
             password,
         };
-        Axios.post(ROUTES.SIGNIN, data)
-            .then((res) => {
-                navigate(ROUTES.HOME);
-            })
-            .catch((err) => {
-                const errMsg = err?.response?.data?.message;
-                toast.error(errMsg);
-            });
+        // Axios.post(ROUTES.SIGNIN, data)
+        //     .then((res) => {
+        //         navigate(ROUTES.HOME);
+        //     })
+        //     .catch((err) => {
+        //         const errMsg = err?.response?.data?.message;
+        //         toast.error(errMsg);
+        //     });
+      
+        try{
+
+            const resp = await signin(data).unwrap()
+       
+            toast.success(resp?.message)
+        }catch(error){
+            toast.error(error?.data?.msg)
+        }
     };
 
     return (

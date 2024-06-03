@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
 
+
 export default function Navbar() {
     const navigate = useNavigate();
 

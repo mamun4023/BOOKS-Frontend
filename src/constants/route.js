@@ -5,5 +5,6 @@ export const ROUTES = {
     LOGOUT : "/logout",
     HOME : "/home",
     PROFILE : "/profile",
-    ME : "/me"
+    ME : "/me",
+    ADD_HISTORY : "/add-history"
 }

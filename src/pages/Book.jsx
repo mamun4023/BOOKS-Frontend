@@ -1,10 +1,14 @@
 
 import React, { useState } from "react";
-import axios from "axios";
 import { Axios } from "../utils/axios";
 import { CONSTANT } from "../constants";
+import {ROUTES} from '../constants/route'
+import axios from "axios";
+import {useAddHistoryMutation, useMeQuery} from '../redux/API'
 
 const BookSearch = () => {
+    const [addHistory] = useAddHistoryMutation()
+    const {refetch} = useMeQuery()
     const [query, setQuery] = useState("");
     const [books, setBooks] = useState([]);
     const [error, setError] = useState("");
@@ -13,11 +17,12 @@ const BookSearch = () => {
 
     const searchBooks = async () => {
         try {
-            // const response = await axios.get(
-            //     `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
-            // );
-            // setBooks(response.data.items);
-            await Axios.post('/add-history', {title : query} )
+            const response = await axios.get(
+                `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
+            );
+            setBooks(response.data.items);
+            await addHistory({title : query})
+            await refetch()
         } catch (err) {
             setError("Error fetching data");
         }

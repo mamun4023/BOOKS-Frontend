@@ -3,17 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
-import {useSignUpMutation} from '../redux/API'
+import { useSignUpMutation } from "../redux/API";
 
 export default function SignUp() {
     const navigate = useNavigate();
-    const [signUp] = useSignUpMutation()
+    const [signUp] = useSignUpMutation();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const signUpHandler = async(e) => {
+    const signUpHandler = async (e) => {
         e.preventDefault();
 
         const data = {
@@ -23,14 +23,13 @@ export default function SignUp() {
             password,
         };
 
-        try{
-           const resp = await signUp(data).unwrap()
-           toast.success(resp?.data?.message)
+        try {
+            const resp = await signUp(data).unwrap();
+            toast.success(resp?.data?.message);
             navigate(ROUTES.HOME);
-        }catch(err){
-            toast.error(err?.data?.message)
+        } catch (err) {
+            toast.error(err?.data?.message);
         }
-
     };
 
     return (

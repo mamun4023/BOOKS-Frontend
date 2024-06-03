@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import { Axios } from "../utils/axios";
 import { CONSTANT } from "../constants";
+import Loader from '../components/Loader'
 import {ROUTES} from '../constants/route'
 import axios from "axios";
 import {useAddHistoryMutation, useMeQuery} from '../redux/API'
+
 
 const BookSearch = () => {
     const [addHistory] = useAddHistoryMutation()
@@ -12,10 +14,11 @@ const BookSearch = () => {
     const [query, setQuery] = useState("");
     const [books, setBooks] = useState([]);
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false)
     const apiKey = import.meta.env.VITE_GOOGLE_API_KEY
 
     const searchBooks = async () => {
+        setLoading(true)
         try {
             const response = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
@@ -23,8 +26,10 @@ const BookSearch = () => {
             setBooks(response.data.items);
             await addHistory({title : query})
             await refetch()
+            setLoading(false)
         } catch (err) {
             setError("Error fetching data");
+            setLoading(false)
         }
     };
 
@@ -51,6 +56,7 @@ const BookSearch = () => {
                 </div>
             </form>
             {error && <p className="text-red-500">{error}</p>}
+            {loading && <Loader />}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {books.map((book) => (
                     <div key={book.id} className="border p-4 rounded">

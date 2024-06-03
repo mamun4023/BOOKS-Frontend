@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import SearchHistory from "../components/SearchHistory";
-import BookSearch from "./Book";
+import BookSearch from "../components/BookSearch";
 
 export default function Home() {
     return (

@@ -1,11 +1,11 @@
-import { createApi , fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ROUTES} from '../constants/route'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { ROUTES } from "../constants/route";
 
 export const applicationAPI = createApi({
-    reducerPath : "API",
-    baseQuery: fetchBaseQuery({ 
-        baseUrl : "http://localhost:4000",
-        credentials : 'include'
+    reducerPath: "API",
+    baseQuery: fetchBaseQuery({
+        baseUrl: import.meta.env.VITE_BASE_URL,
+        credentials: "include",
     }),
     endpoints: (builder) => ({
         signUp: builder.mutation({
@@ -23,28 +23,21 @@ export const applicationAPI = createApi({
             }),
         }),
 
-        me : builder.query({
-            query : ()=> ({
-                url : ROUTES.ME,
-                method : 'GET'
-            })
+        me: builder.query({
+            query: () => ({
+                url: ROUTES.ME,
+                method: "GET",
+            }),
         }),
-        addHistory : builder.mutation({
-            query : (data)=>({
-                url : ROUTES.ADD_HISTORY,
-                method : "POST",
-                body : data
-            })
-        })
-      
-       
+        addHistory: builder.mutation({
+            query: (data) => ({
+                url: ROUTES.ADD_HISTORY,
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const {
-    useSignUpMutation,
-    useSignInMutation,
-    useMeQuery,
-    useAddHistoryMutation
-
-} = applicationAPI;
+export const { useSignUpMutation, useSignInMutation, useMeQuery, useAddHistoryMutation } =
+    applicationAPI;

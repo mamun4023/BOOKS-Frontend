@@ -1,9 +1,7 @@
 
 import React, { useState } from "react";
-import { Axios } from "../utils/axios";
 import { CONSTANT } from "../constants";
 import Loader from '../components/Loader'
-import {ROUTES} from '../constants/route'
 import axios from "axios";
 import {useAddHistoryMutation, useMeQuery} from '../redux/API'
 
@@ -26,10 +24,12 @@ const BookSearch = () => {
             setBooks(response.data.items);
             await addHistory({title : query})
             await refetch()
+            setError("");
             setLoading(false)
         } catch (err) {
-            setError("Error fetching data");
+            setError("No Result");
             setLoading(false)
+            setBooks([])
         }
     };
 
